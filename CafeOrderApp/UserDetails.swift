@@ -8,16 +8,14 @@
 import Foundation
 
 
-class UserDetails: Codable {
+class UserDetails {
     var name: String?
-    var email: String?
+    var birthday: String?
     var gender: String?
-    var birthday: Date?
     
-    init(name: String!, email: String?, gender: String?, birthday: Date?) {
+    init(name: String!, birthday: String?, gender: String?) {
         self.name = name
-        self.email = email
-        self.gender = gender
         self.birthday = birthday
+        self.gender = gender
     }
 }

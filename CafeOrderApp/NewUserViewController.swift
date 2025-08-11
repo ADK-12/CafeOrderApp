@@ -17,17 +17,27 @@ class NewUserViewController: UIViewController {
         super.viewDidLoad()
 
         logoImage.image = UIImage(named: "logo")
+        logoImage.layer.cornerRadius = 12
         
         // Do any additional setup after loading the view.
     }
     
-   
-    @IBAction func addDetailsTapped(_ sender: UIButton) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "UserDetailViewController") as? UserDetailViewController {
+    
+    @IBAction func signUpTapped(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
+            vc.buttonTitle = "Proceed"
             navigationController?.pushViewController(vc, animated: true)
         }
-        
     }
+    
+    
+    @IBAction func logInTapped(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
+            vc.buttonTitle = "Log in"
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     
     /*
     // MARK: - Navigation

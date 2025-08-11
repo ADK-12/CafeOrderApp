@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4855162D2E44A977002BC3BD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4855162C2E44A977002BC3BD /* Kingfisher */; };
+		485517B12E48ABDE002BC3BD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 485517B02E48ABDE002BC3BD /* FirebaseAuth */; };
+		485517B32E48ABDE002BC3BD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 485517B22E48ABDE002BC3BD /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4855162D2E44A977002BC3BD /* Kingfisher in Frameworks */,
+				485517B12E48ABDE002BC3BD /* FirebaseAuth in Frameworks */,
+				485517B32E48ABDE002BC3BD /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +88,8 @@
 			name = CafeOrderApp;
 			packageProductDependencies = (
 				4855162C2E44A977002BC3BD /* Kingfisher */,
+				485517B02E48ABDE002BC3BD /* FirebaseAuth */,
+				485517B22E48ABDE002BC3BD /* FirebaseFirestore */,
 			);
 			productName = CafeOrderApp;
 			productReference = 485515EC2E44A826002BC3BD /* CafeOrderApp.app */;
@@ -115,6 +121,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				4855162B2E44A977002BC3BD /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				485517AF2E48ABDE002BC3BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 485515ED2E44A826002BC3BD /* Products */;
@@ -370,6 +377,14 @@
 				minimumVersion = 8.5.0;
 			};
 		};
+		485517AF2E48ABDE002BC3BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -377,6 +392,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4855162B2E44A977002BC3BD /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		485517B02E48ABDE002BC3BD /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 485517AF2E48ABDE002BC3BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		485517B22E48ABDE002BC3BD /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 485517AF2E48ABDE002BC3BD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+
 
 class HomeViewController: UIViewController, UIScrollViewDelegate {
     
@@ -22,8 +25,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     
     var offerImages = [String]()
     
-    var name = ""
-    
     var isBirthdayMonth = false
     
     
@@ -32,31 +33,43 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         
         ajmerBannerImage.layer.cornerRadius = 10
         
-        
         // Do any additional setup after loading the view.
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        if let userDetails = UserDefaults.standard.data(forKey: "userDetails") {
-            if let decoded = try? JSONDecoder().decode(UserDetails.self, from: userDetails) {
+        let db = Firestore.firestore()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
                 
-                name = decoded.name!
-                welcomeLabel.text = "Hi \(name) welcome to"
+        db.collection("users").document(uid).getDocument { [weak self] document, error in
+            if let error = error {
+                print("Error fetching user: \(error.localizedDescription)")
+                return
+            }
+            
+            if let data = document?.data() {
+                if let name = data["name"] as? String {
+                    self?.welcomeLabel.text = "Hi \(name) welcome to"
+                } else {
+                    self?.welcomeLabel.text = "Hi welcome to"
+                }
                 
-                if let date = decoded.birthday {
-                    let month = Calendar.current.component(.month, from: date)
+                if let birthday = data["birthday"] as? String {
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .medium
+                    formatter.timeStyle = .none
+                    let currentDate = formatter.string(from: Date())
                     
-                    if month == Calendar.current.component(.month, from: Date()) {
-                        offerImages = ["birthdayOffer","offer1", "offer2", "offer3", "offer4"]
+                    if currentDate.components(separatedBy: .whitespaces)[1] == birthday.components(separatedBy: .whitespaces)[1] {
+                        self?.offerImages = ["birthdayOffer","offer1", "offer2", "offer3", "offer4"]
                     } else {
-                        offerImages = ["offer1", "offer2", "offer3", "offer4"]
+                        self?.offerImages = ["offer1", "offer2", "offer3", "offer4"]
                     }
                     
-                    setupOfferScrollView()
+                    self?.setupOfferScrollView()
                 } else {
-                    offerImages = ["offer1", "offer2", "offer3", "offer4"]
-                    setupOfferScrollView()
+                    self?.offerImages = ["offer1", "offer2", "offer3", "offer4"]
+                    self?.setupOfferScrollView()
                 }
             }
         }
@@ -77,7 +90,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         for i in 0..<offerImages.count {
             let imageView = UIImageView()
             imageView.contentMode = .scaleToFill
-            imageView.frame = CGRect(x: width*CGFloat(i), y: 10, width: width * 0.9 , height: height * 0.9)
+            imageView.frame = CGRect(x: width*CGFloat(i), y: 0, width: width, height: height)
             if let image = UIImage(named: offerImages[i]) {
                 imageView.image = image
             }

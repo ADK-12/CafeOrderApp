@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 
 class UserDetailViewController: UIViewController, UITextFieldDelegate {
 
@@ -20,10 +22,7 @@ class UserDetailViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var nameTextField: UITextField!
     
-    @IBOutlet var emailTextField: UITextField!
-    
-    var date: Date?
-    var email: String?
+    var birthday = "Not Provided"
     
     
     override func viewDidLoad() {
@@ -36,8 +35,6 @@ class UserDetailViewController: UIViewController, UITextFieldDelegate {
         maleButton.isSelected = false
         femaleButton.isSelected = false
         otherButtton.isSelected = false
-        
-        emailTextField.delegate = self
         
         setupBirthdayDatePicker()
        
@@ -110,16 +107,14 @@ class UserDetailViewController: UIViewController, UITextFieldDelegate {
     
     @objc func doneTapped() {
         dateChanged()
-        date = birthdayDatePicker.date
         birtdayTextField.resignFirstResponder()
     }
     
     
     @objc func cancelTapped() {
         birtdayTextField.text = ""
-        date = nil
+        birthday = "Not Provided"
         birtdayTextField.resignFirstResponder()
-        
     }
     
     
@@ -129,32 +124,46 @@ class UserDetailViewController: UIViewController, UITextFieldDelegate {
         formatter.timeStyle = .none
             
         birtdayTextField.text = formatter.string(from: birthdayDatePicker.date)
+        birthday = formatter.string(from: birthdayDatePicker.date)
     }
     
     
     @IBAction func saveTapped(_ sender: Any) {
+        let db = Firestore.firestore()
+        
         let name = nameTextField.text!
-        let gender = maleButton.isSelected ? "Male" : femaleButton.isSelected ? "Female" : otherButtton.isSelected ? "Other" : nil
-        if emailTextField.text!.isEmpty {
-            email = nil
-        } else {
-            email = emailTextField.text
+        let gender = maleButton.isSelected ? "Male" : femaleButton.isSelected ? "Female" : otherButtton.isSelected ? "Other" : "Not Provided"
+        
+        guard let user = Auth.auth().currentUser else {
+            return
         }
-        
-        let userDetail = UserDetails(name: name, email: email, gender: gender, birthday: date)
-        
-        if let encoded = try? JSONEncoder().encode(userDetail) {
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(encoded, forKey: "userDetails")
-            
-            userDefaults.set(true, forKey: "isLoggedIn")
+                
+        let userData: [String: Any] = [
+            "name": name,
+            "gender": gender,
+            "email": user.email!,
+            "birthday": birthday,
+            "updatedAt": FieldValue.serverTimestamp()
+        ]
+                
+        db.collection("users").document(user.uid).setData(userData) { [weak self] error in
+            if let error = error {
+                let ac = UIAlertController(title: "Error saving user data", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                self?.present(ac, animated: true)
+                return
+            } else {
+                print("User details saved successfully")
+                
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(true, forKey: "isLoggedIn")
+                
+                guard let window = self?.view.window else { return }
+                guard let sceneDelegate = window.windowScene?.delegate as? SceneDelegate else { return }
+                weak var tabBarController = sceneDelegate.createMainTabBarController()
+                window.rootViewController = tabBarController
+            }
         }
-        
-        guard let window = self.view.window else { return }
-        guard let sceneDelegate = window.windowScene?.delegate as? SceneDelegate else { return }
-        weak var tabBarController = sceneDelegate.createMainTabBarController()
-        window.rootViewController = tabBarController
-            
     }
     /*
     // MARK: - Navigation
