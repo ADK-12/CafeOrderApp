@@ -13,9 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        if #available(iOS 13.0, *) {
-                    window?.overrideUserInterfaceStyle = .light
-        }
         
         let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
         

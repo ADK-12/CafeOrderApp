@@ -87,54 +87,57 @@ class SearchResultViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        filteredMenuData?.menu.count ?? 0
+        return 0
+//        filteredMenuData?.menu.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(filteredMenuData?.menu[section].items.count)! > 0 {
-            return filteredMenuData?.menu[section].type
-        } else {
-            return nil
-        }
+        return nil
+//        if(filteredMenuData?.menu[section].items.count)! > 0 {
+//            return filteredMenuData?.menu[section].type
+//        } else {
+//            return nil
+//        }
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filteredMenuData?.menu[section].items.count ?? 0
+        return 0
+//        filteredMenuData?.menu[section].items.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultMenuCell") as! ResultMenuCell
-        
-        let item = filteredMenuData!.menu[indexPath.section].items[indexPath.row]
-        cell.nameLabel.text = item.name
-        cell.priceLabel.text = "₹\(item.price)"
-        cell.descriptionLabel.text = item.description
-        
-        let urlString = item.image
-        if let url = URL(string: urlString) {
-            cell.itemImage.kf.setImage(with: url)
-            cell.itemImage.layer.cornerRadius = 20
-        }
-        
-        
-        cell.addButton.layer.cornerRadius = 15
-        cell.addButton.layer.borderWidth = 1
-        cell.addButton.layer.borderColor = UIColor.lightGray.cgColor
-        cell.addButton.name = item.name
-        cell.addButton.price = item.price
-        
-        let isCustomizable = filteredMenuData?.menu[indexPath.section].type == "Cold Beverages" || filteredMenuData?.menu[indexPath.section].type  == "Hot Beverages"
-        
-        if isCustomizable {
-            cell.addButton.isCustomizable = true
-        } else {
-            cell.customizeLabel.isHidden = true
-            cell.addButton.isCustomizable = false
-        }
-        
+//        
+//        let item = filteredMenuData!.menu[indexPath.section].items[indexPath.row]
+//        cell.nameLabel.text = item.name
+//        cell.priceLabel.text = "₹\(item.price)"
+//        cell.descriptionLabel.text = item.description
+//        
+//        let urlString = item.image
+//        if let url = URL(string: urlString) {
+//            cell.itemImage.kf.setImage(with: url)
+//            cell.itemImage.layer.cornerRadius = 20
+//        }
+//        
+//        
+//        cell.addButton.layer.cornerRadius = 15
+//        cell.addButton.layer.borderWidth = 1
+//        cell.addButton.layer.borderColor = UIColor.lightGray.cgColor
+//        cell.addButton.name = item.name
+//        cell.addButton.price = item.price
+//        
+//        let isCustomizable = filteredMenuData?.menu[indexPath.section].type == "Cold Beverages" || filteredMenuData?.menu[indexPath.section].type  == "Hot Beverages"
+//        
+//        if isCustomizable {
+//            cell.addButton.isCustomizable = true
+//        } else {
+//            cell.customizeLabel.isHidden = true
+//            cell.addButton.isCustomizable = false
+//        }
+//        
         return cell
     }
     
@@ -164,27 +167,27 @@ class SearchResultViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func updateSearchResults(for searchController: UISearchController) {
-        let searchText = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        
-        
-        if searchText.isEmpty {
-            searchResultVC.filteredMenuData = menuData
-        } else {
-            var filteredMenuData = menuData!
-            
-            for i in 0..<menuData!.menu.count {
-                let filteredItems = menuData!.menu[i].items.filter { item in
-                    item.name.lowercased().contains(searchText)
-                }
-                
-                filteredMenuData.menu[i].items = filteredItems
-            }
-            
-            searchResultVC.filteredMenuData = filteredMenuData
-        }
-        
-        searchResultVC.searchResultTableView.reloadData()
-        searchResultVC.presentingVC = self
+//        let searchText = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        
+//        
+//        if searchText.isEmpty {
+//            searchResultVC.filteredMenuData = menuData
+//        } else {
+//            var filteredMenuData = menuData!
+//            
+//            for i in 0..<menuData!.menu.count {
+//                let filteredItems = menuData!.menu[i].items.filter { item in
+//                    item.name.lowercased().contains(searchText)
+//                }
+//                
+//                filteredMenuData.menu[i].items = filteredItems
+//            }
+//            
+//            searchResultVC.filteredMenuData = filteredMenuData
+//        }
+//        
+//        searchResultVC.searchResultTableView.reloadData()
+//        searchResultVC.presentingVC = self
     }
     
     

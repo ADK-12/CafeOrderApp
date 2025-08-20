@@ -8,15 +8,12 @@
 import Foundation
 
 struct Menu: Codable {
-    var menu: [SubMenu]
-}
-
-struct SubMenu: Codable {
     let type: String
-    var items: [MenuItem]
+    let image: String
+    let items: [Item]
 }
 
-struct MenuItem: Codable {
+struct Item: Codable {
     let name: String
     let description: String
     let price: Int 
