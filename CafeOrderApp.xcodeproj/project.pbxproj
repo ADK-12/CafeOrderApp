@@ -17,7 +17,6 @@
 		48D219602E5374D4001343B1 /* AddItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219402E5374D4001343B1 /* AddItemSheet.swift */; };
 		48D219612E5374D4001343B1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219412E5374D4001343B1 /* APIManager.swift */; };
 		48D219622E5374D4001343B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219422E5374D4001343B1 /* AppDelegate.swift */; };
-		48D219632E5374D4001343B1 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219442E5374D4001343B1 /* CartCell.swift */; };
 		48D219642E5374D4001343B1 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219452E5374D4001343B1 /* CartItem.swift */; };
 		48D219652E5374D4001343B1 /* CartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219462E5374D4001343B1 /* CartTableViewController.swift */; };
 		48D219662E5374D4001343B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219482E5374D4001343B1 /* HomeViewController.swift */; };
@@ -41,6 +40,9 @@
 		48D2199C2E574BB1001343B1 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219992E574BB1001343B1 /* MenuTableViewCell.swift */; };
 		48E6E5DF2E5890E40011D47E /* CartViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E6E5DE2E5890E40011D47E /* CartViewModal.swift */; };
 		48E6E5E12E5892940011D47E /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E6E5E02E5892940011D47E /* CartManager.swift */; };
+		48E6E5E42E5906160011D47E /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E6E5E22E5906160011D47E /* CartTableViewCell.swift */; };
+		48E6E5E52E5906160011D47E /* CartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48E6E5E32E5906160011D47E /* CartTableViewCell.xib */; };
+		48E6E5E72E5928EE0011D47E /* OrderPlacedViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E6E5E62E5928EE0011D47E /* OrderPlacedViewModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +51,6 @@
 		48D219412E5374D4001343B1 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		48D219422E5374D4001343B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48D219432E5374D4001343B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		48D219442E5374D4001343B1 /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		48D219452E5374D4001343B1 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		48D219462E5374D4001343B1 /* CartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewController.swift; sourceTree = "<group>"; };
 		48D219472E5374D4001343B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -77,6 +78,9 @@
 		48D2199A2E574BB1001343B1 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		48E6E5DE2E5890E40011D47E /* CartViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModal.swift; sourceTree = "<group>"; };
 		48E6E5E02E5892940011D47E /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		48E6E5E22E5906160011D47E /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		48E6E5E32E5906160011D47E /* CartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartTableViewCell.xib; sourceTree = "<group>"; };
+		48E6E5E62E5928EE0011D47E /* OrderPlacedViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPlacedViewModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,16 +123,8 @@
 				48D219752E5374DF001343B1 /* Screens */,
 				48D219742E5374DB001343B1 /* Storyboard */,
 				48D219732E5374D8001343B1 /* Resources */,
-				48D219442E5374D4001343B1 /* CartCell.swift */,
 				48D219472E5374D4001343B1 /* GoogleService-Info.plist */,
-				48D219482E5374D4001343B1 /* HomeViewController.swift */,
 				48D219492E5374D4001343B1 /* Info.plist */,
-				48D2194C2E5374D4001343B1 /* LogInViewController.swift */,
-				48D219522E5374D4001343B1 /* MyAccountViewController.swift */,
-				48D219532E5374D4001343B1 /* NewUserViewController.swift */,
-				48D219542E5374D4001343B1 /* OrderPlacedViewController.swift */,
-				48D219582E5374D4001343B1 /* UserDetails.swift */,
-				48D219592E5374D4001343B1 /* UserDetailViewController.swift */,
 			);
 			path = CafeOrderApp;
 			sourceTree = "<group>";
@@ -153,10 +149,16 @@
 		48D219752E5374DF001343B1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				48E6E5ED2E592E800011D47E /* Launch */,
+				48E6E5EB2E592DE90011D47E /* New User */,
+				48E6E5EA2E592D1B0011D47E /* Login Signup */,
+				48E6E5EC2E592DEC0011D47E /* User Details */,
+				48E6E5E82E592D130011D47E /* Home */,
 				48D2197C2E537681001343B1 /* Menu Home */,
 				48D2197B2E53767E001343B1 /* Detailed Menu */,
 				48D2197A2E537679001343B1 /* Cart */,
-				48D2197D2E537684001343B1 /* Order Complete */,
+				48D2197D2E537684001343B1 /* Order Placed */,
+				48E6E5E92E592D170011D47E /* My Account */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -224,19 +226,19 @@
 			path = "Menu Home";
 			sourceTree = "<group>";
 		};
-		48D2197D2E537684001343B1 /* Order Complete */ = {
+		48D2197D2E537684001343B1 /* Order Placed */ = {
 			isa = PBXGroup;
 			children = (
-				48D219802E5376B6001343B1 /* Model */,
 				48D2197F2E5376B2001343B1 /* View */,
 				48D2197E2E5376B0001343B1 /* ViewModal */,
 			);
-			path = "Order Complete";
+			path = "Order Placed";
 			sourceTree = "<group>";
 		};
 		48D2197E2E5376B0001343B1 /* ViewModal */ = {
 			isa = PBXGroup;
 			children = (
+				48E6E5E62E5928EE0011D47E /* OrderPlacedViewModal.swift */,
 			);
 			path = ViewModal;
 			sourceTree = "<group>";
@@ -244,15 +246,9 @@
 		48D2197F2E5376B2001343B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				48D219542E5374D4001343B1 /* OrderPlacedViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		48D219802E5376B6001343B1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		48D219812E53770E001343B1 /* Model */ = {
@@ -312,6 +308,8 @@
 			isa = PBXGroup;
 			children = (
 				48D219462E5374D4001343B1 /* CartTableViewController.swift */,
+				48E6E5E22E5906160011D47E /* CartTableViewCell.swift */,
+				48E6E5E32E5906160011D47E /* CartTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +320,54 @@
 				48E6E5DE2E5890E40011D47E /* CartViewModal.swift */,
 			);
 			path = ViewModal;
+			sourceTree = "<group>";
+		};
+		48E6E5E82E592D130011D47E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				48D219482E5374D4001343B1 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		48E6E5E92E592D170011D47E /* My Account */ = {
+			isa = PBXGroup;
+			children = (
+				48D219522E5374D4001343B1 /* MyAccountViewController.swift */,
+			);
+			path = "My Account";
+			sourceTree = "<group>";
+		};
+		48E6E5EA2E592D1B0011D47E /* Login Signup */ = {
+			isa = PBXGroup;
+			children = (
+				48D2194C2E5374D4001343B1 /* LogInViewController.swift */,
+			);
+			path = "Login Signup";
+			sourceTree = "<group>";
+		};
+		48E6E5EB2E592DE90011D47E /* New User */ = {
+			isa = PBXGroup;
+			children = (
+				48D219532E5374D4001343B1 /* NewUserViewController.swift */,
+			);
+			path = "New User";
+			sourceTree = "<group>";
+		};
+		48E6E5EC2E592DEC0011D47E /* User Details */ = {
+			isa = PBXGroup;
+			children = (
+				48D219582E5374D4001343B1 /* UserDetails.swift */,
+				48D219592E5374D4001343B1 /* UserDetailViewController.swift */,
+			);
+			path = "User Details";
+			sourceTree = "<group>";
+		};
+		48E6E5ED2E592E800011D47E /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,6 +440,7 @@
 			files = (
 				48D2199B2E574BB1001343B1 /* MenuTableViewCell.xib in Resources */,
 				48D2195B2E5374D4001343B1 /* Assets.xcassets in Resources */,
+				48E6E5E52E5906160011D47E /* CartTableViewCell.xib in Resources */,
 				48D2195C2E5374D4001343B1 /* GoogleService-Info.plist in Resources */,
 				48D219902E566072001343B1 /* MenuCollectionViewCell.xib in Resources */,
 				48D2195E2E5374D4001343B1 /* LaunchScreen.storyboard in Resources */,
@@ -412,11 +459,11 @@
 				48D219612E5374D4001343B1 /* APIManager.swift in Sources */,
 				48D2199C2E574BB1001343B1 /* MenuTableViewCell.swift in Sources */,
 				48D219622E5374D4001343B1 /* AppDelegate.swift in Sources */,
-				48D219632E5374D4001343B1 /* CartCell.swift in Sources */,
 				48E6E5E12E5892940011D47E /* CartManager.swift in Sources */,
 				48D219642E5374D4001343B1 /* CartItem.swift in Sources */,
 				48D219652E5374D4001343B1 /* CartTableViewController.swift in Sources */,
 				48D219662E5374D4001343B1 /* HomeViewController.swift in Sources */,
+				48E6E5E42E5906160011D47E /* CartTableViewCell.swift in Sources */,
 				48D219912E566072001343B1 /* MenuCollectionViewCell.swift in Sources */,
 				48D2198B2E55B046001343B1 /* Constant.swift in Sources */,
 				48D219672E5374D4001343B1 /* LogInViewController.swift in Sources */,
@@ -426,6 +473,7 @@
 				48D2196B2E5374D4001343B1 /* MyAccountViewController.swift in Sources */,
 				48D2198D2E55BAA6001343B1 /* MenuViewModal.swift in Sources */,
 				48E6E5DF2E5890E40011D47E /* CartViewModal.swift in Sources */,
+				48E6E5E72E5928EE0011D47E /* OrderPlacedViewModal.swift in Sources */,
 				48D2196C2E5374D4001343B1 /* NewUserViewController.swift in Sources */,
 				48D2196D2E5374D4001343B1 /* OrderPlacedViewController.swift in Sources */,
 				48D219932E566E70001343B1 /* UIImageViewExtension.swift in Sources */,

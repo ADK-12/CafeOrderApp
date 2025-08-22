@@ -87,7 +87,6 @@ class SearchResultViewController: UIViewController {
     
     func setupCartButton() {
         var config = UIButton.Configuration.filled()
-//        config.title = "\(cartData.shared.totalQuantity) item(s) added"
         config.image = UIImage(systemName: "cart.fill")
         config.imagePlacement = .trailing
         config.imagePadding = 8

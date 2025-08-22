@@ -489,91 +489,9 @@
         <scene sceneID="r3H-W0-ojI">
             <objects>
                 <tableViewController storyboardIdentifier="CartTableViewController" id="khD-9n-02e" customClass="CartTableViewController" customModule="CafeOrderApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="1pN-Mq-xxZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" id="1pN-Mq-xxZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CartCell" rowHeight="65" id="FPJ-F8-HPa" customClass="CartCell" customModule="CafeOrderApp" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="65"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FPJ-F8-HPa" id="SZ0-J2-oEN">
-                                    <rect key="frame" x="0.0" y="0.0" width="353" height="65"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cold Coffee with Icecream" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljB-96-CjU">
-                                            <rect key="frame" x="20" y="14.666666666666664" width="150" height="36"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="150" id="sjt-XC-XQq"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="es9-VU-ycN">
-                                            <rect key="frame" x="180" y="17.666666666666671" width="80" height="30"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bg9-Do-Lmh" customClass="CartDataButton" customModule="CafeOrderApp" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="26.666666666666668" height="30"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="-" titleAlignment="center">
-                                                        <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="25"/>
-                                                        <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="1" trailing="0.0"/>
-                                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="minusTapped:" destination="khD-9n-02e" eventType="touchUpInside" id="gmH-bm-vpe"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GRK-eY-FrQ">
-                                                    <rect key="frame" x="26.666666666666657" y="4.6666666666666643" width="26.666666666666671" height="20.333333333333332"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szu-36-5O4" customClass="CartDataButton" customModule="CafeOrderApp" customModuleProvider="target">
-                                                    <rect key="frame" x="53.333333333333336" y="3" width="26.666666666666664" height="24"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="+" titleAlignment="center">
-                                                        <fontDescription key="titleFontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="20"/>
-                                                        <directionalEdgeInsets key="contentInsets" top="0.0" leading="0.0" bottom="1" trailing="0.0"/>
-                                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </buttonConfiguration>
-                                                    <connections>
-                                                        <action selector="plusTapped:" destination="khD-9n-02e" eventType="touchUpInside" id="7os-nr-ggu"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" name="AccentColor"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="Nkk-rL-6XK"/>
-                                            </constraints>
-                                        </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4S4-a9-BPX">
-                                            <rect key="frame" x="287" y="23.666666666666671" width="46" height="18"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="es9-VU-ycN" firstAttribute="centerY" secondItem="SZ0-J2-oEN" secondAttribute="centerY" id="4to-OE-VPB"/>
-                                        <constraint firstItem="es9-VU-ycN" firstAttribute="leading" secondItem="ljB-96-CjU" secondAttribute="trailing" constant="10" id="Bpb-8v-7sR"/>
-                                        <constraint firstItem="ljB-96-CjU" firstAttribute="leading" secondItem="SZ0-J2-oEN" secondAttribute="leading" constant="20" symbolic="YES" id="ChG-kg-rRY"/>
-                                        <constraint firstItem="4S4-a9-BPX" firstAttribute="centerY" secondItem="SZ0-J2-oEN" secondAttribute="centerY" id="HJP-kr-MlF"/>
-                                        <constraint firstItem="ljB-96-CjU" firstAttribute="centerY" secondItem="SZ0-J2-oEN" secondAttribute="centerY" id="OSf-7t-0n6"/>
-                                        <constraint firstAttribute="trailing" secondItem="4S4-a9-BPX" secondAttribute="trailing" constant="20" symbolic="YES" id="SFP-FO-gBp"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="customStepper" destination="es9-VU-ycN" id="uGe-uw-BLZ"/>
-                                    <outlet property="minusButton" destination="Bg9-Do-Lmh" id="u1p-EG-f0R"/>
-                                    <outlet property="name" destination="ljB-96-CjU" id="ieG-hD-yj0"/>
-                                    <outlet property="plusButton" destination="szu-36-5O4" id="nfh-JH-S3V"/>
-                                    <outlet property="priceLabel" destination="4S4-a9-BPX" id="Lto-RC-qM0"/>
-                                    <outlet property="quantityLabel" destination="GRK-eY-FrQ" id="TjN-rw-fAz"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="khD-9n-02e" id="mF7-dK-Bjz"/>
                             <outlet property="delegate" destination="khD-9n-02e" id="9xQ-Xi-lSR"/>

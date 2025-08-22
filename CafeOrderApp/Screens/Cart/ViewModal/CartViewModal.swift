@@ -8,11 +8,17 @@
 import Foundation
 
 class CartViewModal {
+    var cartItems = CartManager.shared.allItems
     
-    var cart = [CartItem]()
-    
-    func fetchCart() {
-        
+    var totalPrice: Int {
+        var price = 0
+        for item in cartItems {
+            price += item.price * item.quantity
+        }
+        return price
     }
     
+    func updateCart() {
+        CartManager.shared.allItems = cartItems
+    }
 }

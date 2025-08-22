@@ -33,20 +33,12 @@ class CartManager {
         return quantity
     }
     
-    var totalPrice: Int {
-        var price = 0
-        for item in allItems {
-            price += item.price * item.quantity
-        }
-        return price
-    }
-    
     
     func fetchCart() {
         if let savedData = userDefaults.data(forKey: "CartItems") {
             if let decoded = try? JSONDecoder().decode([CartItem].self, from: savedData) {
                 allItems = decoded
-                print("cart fetched")
+                print("Cart fetched")
             }
         } else {
             print("No cart data found")
