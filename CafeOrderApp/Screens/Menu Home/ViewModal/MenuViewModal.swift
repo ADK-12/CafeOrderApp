@@ -14,10 +14,9 @@ final class MenuViewModal {
     var eventHandler: ((_ event: Event) -> Void)? // Data Binding Closure
     
     func fetchMenu() {
-        eventHandler?(.loading)
         Task {
             do {
-                eventHandler?(.stopLoading)
+                eventHandler?(.loading)
                 menu = try await APIManager.shared.fetchData()
                 eventHandler?(.dataLoaded)
             } catch {
@@ -25,13 +24,17 @@ final class MenuViewModal {
             }
         }
     }
+    
+    
+    func fetchCart() {
+        CartManager.shared.fetchCart()
+    }
 }
 
 
 extension MenuViewModal {
     enum Event {
         case loading
-        case stopLoading
         case dataLoaded
         case error(Error?)
     }

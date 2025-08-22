@@ -12,13 +12,13 @@ class OrderPlacedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "order Placed"
-        
-        cartData.shared.allItems = [item]()
-        
-        if let count = navigationController?.viewControllers.count {
-            navigationController?.viewControllers.remove(at: count-2)
-        }
+//        title = "order Placed"
+//        
+//        cartData.shared.allItems = [item]()
+//        
+//        if let count = navigationController?.viewControllers.count {
+//            navigationController?.viewControllers.remove(at: count-2)
+//        }
         
         // Do any additional setup after loading the view.
     }

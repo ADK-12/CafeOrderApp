@@ -194,7 +194,7 @@ class MyAccountViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
             UserDefaults.standard.set(false, forKey: "isLoggedIn")
             
-            cartData.shared.allItems.removeAll()
+//            cartData.shared.allItems.removeAll()
             
             do {
                 try Auth.auth().signOut()

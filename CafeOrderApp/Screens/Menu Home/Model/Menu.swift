@@ -10,7 +10,7 @@ import Foundation
 struct Menu: Codable {
     let type: String
     let image: String
-    let items: [Item]
+    var items: [Item]
 }
 
 struct Item: Codable {
@@ -18,4 +18,5 @@ struct Item: Codable {
     let description: String
     let price: Int 
     let image: String
+    let isCustomizable: Bool
 }

@@ -7,11 +7,12 @@
 
 import UIKit
 
-class AddItemViewController: UIViewController {
+class AddItemSheet: UIViewController {
 
-    var isCustomizable: Bool?
-    var name: String?
-    var price: Int?
+    var isCustomizable = true
+    var name = ""
+    var price = 0
+    var onDismiss: (() -> Void)?
     
     var quantityLabel = UILabel()
     var priceLabel = UILabel()
@@ -19,25 +20,22 @@ class AddItemViewController: UIViewController {
     var selectLargeButton = UIButton(type: .system)
     var addItemButton = UIButton(type: .custom)
     
-    
-    var regularPrice: Int?
+    var finalPrice = 0
     
     var quantity = 1 {
         didSet {
             quantityLabel.text = "\(quantity)"
-            priceLabel.text = "₹\((price ?? 100)*quantity)"
+            priceLabel.text = "₹\((finalPrice)*quantity)"
         }
     }
     
-    weak var presentingVC: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        regularPrice = price
+        finalPrice = price
         
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 20
+        view.backgroundColor = .secondarySystemBackground
         
         setupSubViews()
 
@@ -71,7 +69,7 @@ class AddItemViewController: UIViewController {
         separatorLine2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(separatorLine2)
         
-        if isCustomizable ?? true {
+        if isCustomizable {
             let sizeLabel = UILabel()
             sizeLabel.text = "Size"
             sizeLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
@@ -98,7 +96,7 @@ class AddItemViewController: UIViewController {
             
             var config = UIButton.Configuration.plain()
             config.baseBackgroundColor = .clear
-            config.baseForegroundColor = .blue
+            config.baseForegroundColor = .systemBlue
             
             selectRegularButton.configuration = config
             selectRegularButton.setImage(UIImage(systemName: "circle"), for: .normal)
@@ -180,7 +178,7 @@ class AddItemViewController: UIViewController {
         
         let cutomStepper = UIStackView(arrangedSubviews: [minusButton, quantityLabel, plusButton])
         cutomStepper.layer.cornerRadius = 20
-        cutomStepper.backgroundColor = .blue
+        cutomStepper.backgroundColor = .systemBlue
         cutomStepper.axis = .horizontal
         cutomStepper.alignment = .center
         cutomStepper.distribution = .fillProportionally
@@ -189,7 +187,7 @@ class AddItemViewController: UIViewController {
         view.addSubview(cutomStepper)
         
         addItemButton.setTitle("ADD ITEM   |         ", for: .normal)
-        addItemButton.backgroundColor = .blue
+        addItemButton.backgroundColor = .systemBlue
         addItemButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         addItemButton.tintColor = .white
         addItemButton.layer.cornerRadius = 10
@@ -197,7 +195,7 @@ class AddItemViewController: UIViewController {
         view.addSubview(addItemButton)
         addItemButton.addTarget(self, action: #selector(addItemTapped), for: .touchDown)
         
-        priceLabel.text = "₹\((price ?? 100)*quantity)"
+        priceLabel.text = "₹\((finalPrice)*quantity)"
         priceLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         priceLabel.alpha = 1
         priceLabel.textColor = .white
@@ -239,18 +237,19 @@ class AddItemViewController: UIViewController {
     
     
     @objc func selectRegularButtonTapped() {
-        if price! > regularPrice! {
-            price = regularPrice
+        if finalPrice > price {
+            finalPrice = price
             quantity += 0
         }
+        
         selectRegularButton.isSelected = true
         selectLargeButton.isSelected = false
     }
     
     
     @objc func selectLargeButtonTapped() {
-        if price! == regularPrice! {
-            price! += 40
+        if finalPrice == price {
+            finalPrice += 40
             quantity += 0
         }
         
@@ -276,48 +275,27 @@ class AddItemViewController: UIViewController {
     
     
     @objc func addItemTapped() {
-        dismiss(animated: true)
-        
         var size: String?
-        if isCustomizable ?? true {
+        if isCustomizable {
             size = selectRegularButton.isSelected ? "Regular" : "Large"
         } else {
             size = nil
         }
         
-        for (index,item) in cartData.shared.allItems.enumerated() {
+        for (index,item) in CartManager.shared.allItems.enumerated() {
             if item.name == name {
                 if item.size == size {
-                    cartData.shared.allItems[index].quantity += quantity
-                    updateToolbar()
+                    CartManager.shared.allItems[index].quantity += quantity
+                    dismiss(animated: true)
+                    onDismiss?()
                     return
                 }
             }
         }
         
-        cartData.shared.allItems.append(item(name: name!, size: size, quantity: quantity, price: price!))
-        
-        updateToolbar()
-    }
-    
-    
-    
-    func updateToolbar() {
-        if let presentingVC = presentingVC as? SearchResultViewController {
-            if let mainVC = presentingVC.presentingVC as? MenuViewController {
-                mainVC.customCartButton.setTitle("\(cartData.shared.totalQuantity) item(s) added", for: .normal)
-                mainVC.navigationController?.isToolbarHidden = false
-                return
-            } else if let mainVC = presentingVC.presentingVC as? SearchResultViewController {
-                mainVC.customCartButton.setTitle("\(cartData.shared.totalQuantity) item(s) added", for: .normal)
-                mainVC.navigationController?.isToolbarHidden = false
-                return
-            } else  {
-                presentingVC.customCartButton.setTitle("\(cartData.shared.totalQuantity) item(s) added", for: .normal)
-                presentingVC.navigationController?.isToolbarHidden = false
-            }
-            
-        }
+        CartManager.shared.allItems.append(CartItem(name: name, size: size, quantity: quantity, price: finalPrice))
+        dismiss(animated: true)
+        onDismiss?()
     }
     
 
