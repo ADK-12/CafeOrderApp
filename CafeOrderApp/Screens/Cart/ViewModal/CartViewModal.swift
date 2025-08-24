@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class CartViewModal {
     var cartItems = CartManager.shared.allItems
     
@@ -20,5 +21,9 @@ class CartViewModal {
     
     func updateCart() {
         CartManager.shared.allItems = cartItems
+    }
+    
+    func trashTapped() {
+        cartItems = []
     }
 }

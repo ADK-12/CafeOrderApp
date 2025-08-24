@@ -8,11 +8,10 @@
 
 import UIKit
 
+
 class SearchResultViewController: UIViewController {
 
     var viewModal = SearchResultViewModel()
-    
-    var isPresented = false
     
     @IBOutlet var searchResultTableView: UITableView!
     
@@ -29,9 +28,9 @@ class SearchResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if CartManager.shared.totalQuantity > 0 {
+        if viewModal.cartQuantity > 0 {
             navigationController?.isToolbarHidden = false
-            customCartButton.setTitle("\(CartManager.shared.totalQuantity) item(s) added", for: .normal)
+            customCartButton.setTitle("\(viewModal.cartQuantity) item(s) added", for: .normal)
         } else {
             navigationController?.isToolbarHidden = true
         }
@@ -159,18 +158,18 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
         
         cell.item = item
         cell.onButtonTap = { [weak self] in
-            let vc = AddItemSheet()
-            vc.isCustomizable = item.isCustomizable
-            vc.name = item.name
-            vc.price = item.price
-            vc.onDismiss = { [weak self] in
-                if self?.isPresented ?? false {
+            let vc = AddItemViewController()
+            vc.viewModal.isCustomizable = item.isCustomizable
+            vc.viewModal.name = item.name
+            vc.viewModal.price = item.price
+            vc.viewModal.onDismiss = { [weak self] in
+                if self?.viewModal.isPresented ?? false {
                     if let presentingVC = self?.presentingViewController as? MenuViewController {
-                        presentingVC.customCartButton.setTitle("\(CartManager.shared.totalQuantity) item(s) added", for: .normal)
+                        presentingVC.customCartButton.setTitle("\(self?.viewModal.cartQuantity ?? 0) item(s) added", for: .normal)
                         presentingVC.navigationController?.isToolbarHidden = false
                     }
                 } else {
-                    self?.customCartButton.setTitle("\(CartManager.shared.totalQuantity) item(s) added", for: .normal)
+                    self?.customCartButton.setTitle("\(self?.viewModal.cartQuantity ?? 0) item(s) added", for: .normal)
                     self?.navigationController?.isToolbarHidden = false
                 }
             }

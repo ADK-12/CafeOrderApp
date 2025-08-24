@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class MenuViewController: UIViewController {
     
     private var viewModal = MenuViewModal()
@@ -27,12 +28,7 @@ class MenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if CartManager.shared.totalQuantity > 0 {
-            navigationController?.isToolbarHidden = false
-            customCartButton.setTitle("\(CartManager.shared.totalQuantity) item(s) added", for: .normal)
-        } else {
-            navigationController?.isToolbarHidden = true
-        }
+        updateToolbar()
     }
     
     
@@ -40,21 +36,25 @@ class MenuViewController: UIViewController {
         menuCollectionView.register(UINib(nibName: "MenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MenuCollectionViewCell")
         
         fetchMenu()
-        observeEvent()
-        
-        setupCartButton()
         
         fetchCart()
+        
+        setupCartButton()
+    }
+    
+    
+    func updateToolbar() {
+        if viewModal.cartQuantity > 0 {
+            navigationController?.isToolbarHidden = false
+            customCartButton.setTitle("\(viewModal.cartQuantity) item(s) added", for: .normal)
+        } else {
+            navigationController?.isToolbarHidden = true
+        }
     }
     
     
     func fetchMenu() {
-        viewModal.fetchMenu()
-    }
-    
-    
-    func observeEvent() {
-        viewModal.eventHandler = { [weak self] event in
+        viewModal.onMenuFetch = { [weak self] event in
             switch event {
             case .loading:
                 print("Loading...")
@@ -73,19 +73,17 @@ class MenuViewController: UIViewController {
                 }
             }
         }
+        
+        viewModal.fetchMenu()
     }
     
     
     func fetchCart() {
         viewModal.fetchCart()
         
-        if CartManager.shared.totalQuantity > 0 {
-            navigationController?.isToolbarHidden = false
-            customCartButton.setTitle("\(CartManager.shared.totalQuantity) item(s) added", for: .normal)
-        } else {
-            navigationController?.isToolbarHidden = true
-        }
+        updateToolbar()
     }
+    
     
     func setupCartButton() {
         var buttonConfig = UIButton.Configuration.filled()
@@ -114,7 +112,7 @@ class MenuViewController: UIViewController {
     
     func setupSearchController() {
         let vc = storyboard?.instantiateViewController(withIdentifier: "SearchResultViewController") as? SearchResultViewController
-        vc?.isPresented = true
+        vc?.viewModal.isPresented = true
         let searchController = UISearchController(searchResultsController: vc)
         searchController.searchResultsUpdater = self
         searchController.delegate = self

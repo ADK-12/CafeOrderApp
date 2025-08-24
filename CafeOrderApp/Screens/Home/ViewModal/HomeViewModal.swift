@@ -14,6 +14,7 @@ class HomeViewModal {
     
     var offerImages = [String]()
     
+    var onError: (() -> Void)?
     var onNameFetch: ((String?) -> Void)?
     var onBirthdayFetch: ((String?) -> Void)?
     
@@ -25,6 +26,7 @@ class HomeViewModal {
         database.collection("users").document(uid).getDocument { [weak self] document, error in
             if let error = error {
                 print("Error fetching user: \(error.localizedDescription)")
+                self?.onError?()
                 return
             }
             

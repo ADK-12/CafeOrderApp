@@ -15,11 +15,12 @@
 		487CF15F2E5A4F3B008C2DA6 /* HomeViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487CF15E2E5A4F3B008C2DA6 /* HomeViewModal.swift */; };
 		487CF1632E5A65E6008C2DA6 /* MyAccountViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487CF1622E5A65E6008C2DA6 /* MyAccountViewModal.swift */; };
 		487CF1662E5A73AB008C2DA6 /* UserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487CF1652E5A73AB008C2DA6 /* UserDetails.swift */; };
+		487CF16E2E5B9CF6008C2DA6 /* AddItemViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487CF16D2E5B9CF6008C2DA6 /* AddItemViewModal.swift */; };
 		48D2195B2E5374D4001343B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48D219432E5374D4001343B1 /* Assets.xcassets */; };
 		48D2195C2E5374D4001343B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48D219472E5374D4001343B1 /* GoogleService-Info.plist */; };
 		48D2195E2E5374D4001343B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D2194B2E5374D4001343B1 /* LaunchScreen.storyboard */; };
 		48D2195F2E5374D4001343B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D2194E2E5374D4001343B1 /* Main.storyboard */; };
-		48D219602E5374D4001343B1 /* AddItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219402E5374D4001343B1 /* AddItemSheet.swift */; };
+		48D219602E5374D4001343B1 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219402E5374D4001343B1 /* AddItemViewController.swift */; };
 		48D219612E5374D4001343B1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219412E5374D4001343B1 /* APIManager.swift */; };
 		48D219622E5374D4001343B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219422E5374D4001343B1 /* AppDelegate.swift */; };
 		48D219642E5374D4001343B1 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D219452E5374D4001343B1 /* CartItem.swift */; };
@@ -56,7 +57,8 @@
 		487CF15E2E5A4F3B008C2DA6 /* HomeViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModal.swift; sourceTree = "<group>"; };
 		487CF1622E5A65E6008C2DA6 /* MyAccountViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModal.swift; sourceTree = "<group>"; };
 		487CF1652E5A73AB008C2DA6 /* UserDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
-		48D219402E5374D4001343B1 /* AddItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemSheet.swift; sourceTree = "<group>"; };
+		487CF16D2E5B9CF6008C2DA6 /* AddItemViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewModal.swift; sourceTree = "<group>"; };
+		48D219402E5374D4001343B1 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		48D219412E5374D4001343B1 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		48D219422E5374D4001343B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48D219432E5374D4001343B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -201,6 +203,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		487CF16A2E5B9C65008C2DA6 /* Add Item */ = {
+			isa = PBXGroup;
+			children = (
+				487CF16C2E5B9C96008C2DA6 /* View */,
+				487CF16B2E5B9C93008C2DA6 /* ViewModal */,
+			);
+			path = "Add Item";
+			sourceTree = "<group>";
+		};
+		487CF16B2E5B9C93008C2DA6 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				487CF16D2E5B9CF6008C2DA6 /* AddItemViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
+		487CF16C2E5B9C96008C2DA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				48D219402E5374D4001343B1 /* AddItemViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		48D2195A2E5374D4001343B1 /* CafeOrderApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +271,7 @@
 				48E6E5E82E592D130011D47E /* Home */,
 				48D2197C2E537681001343B1 /* Menu Home */,
 				48D2197B2E53767E001343B1 /* Detailed Menu */,
+				487CF16A2E5B9C65008C2DA6 /* Add Item */,
 				48D2197A2E537679001343B1 /* Cart */,
 				48D2197D2E537684001343B1 /* Order Placed */,
 				48E6E5E92E592D170011D47E /* My Account */,
@@ -371,7 +399,6 @@
 				48D219572E5374D4001343B1 /* SearchResultViewController.swift */,
 				48D219992E574BB1001343B1 /* MenuTableViewCell.swift */,
 				48D2199A2E574BB1001343B1 /* MenuTableViewCell.xib */,
-				48D219402E5374D4001343B1 /* AddItemSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -547,7 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D219602E5374D4001343B1 /* AddItemSheet.swift in Sources */,
+				48D219602E5374D4001343B1 /* AddItemViewController.swift in Sources */,
 				487CF1562E59D3FA008C2DA6 /* LoginViewModal.swift in Sources */,
 				48D219612E5374D4001343B1 /* APIManager.swift in Sources */,
 				48D2199C2E574BB1001343B1 /* MenuTableViewCell.swift in Sources */,
@@ -576,6 +603,7 @@
 				48D219702E5374D4001343B1 /* SearchResultViewController.swift in Sources */,
 				487CF1632E5A65E6008C2DA6 /* MyAccountViewModal.swift in Sources */,
 				48D219722E5374D4001343B1 /* UserDetailViewController.swift in Sources */,
+				487CF16E2E5B9CF6008C2DA6 /* AddItemViewModal.swift in Sources */,
 				487CF1662E5A73AB008C2DA6 /* UserDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,12 @@ import Foundation
 
 
 final class SearchResultViewModel {
+    var isPresented = false
+
     var menu = [Menu]()
     var filteredMenu = [Menu]()
+    
+    var cartQuantity: Int {
+        return CartManager.shared.totalQuantity
+    }
 }

@@ -6,8 +6,7 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
+
 
 class MyAccountViewController: UIViewController {
 
@@ -32,6 +31,17 @@ class MyAccountViewController: UIViewController {
     
     func configuration() {
         title = "Profile"
+        
+        viewModal.onError = { [weak self] error in
+            let ac = UIAlertController(title: "Error fetching user details:", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .default))
+            if let error = error {
+                ac.message = error.localizedDescription
+            } else {
+                ac.message = "Error in Dictionary Parsing"
+            }
+            self?.present(ac, animated: true)
+        }
         
         viewModal.onDetailsFetched = { [weak self] in
             guard let userDetails = self?.viewModal.userDetails else { return }
@@ -92,13 +102,15 @@ class MyAccountViewController: UIViewController {
         let ac = UIAlertController(title: "Update Birthday", message: nil, preferredStyle: .alert)
         ac.addTextField { [weak self] textField in
         
-            textField.text = self?.viewModal.userDetails?.birthday
+            textField.placeholder = "Select a date"
         
             self?.birthdayDatePicker.datePickerMode = .date
             self?.birthdayDatePicker.preferredDatePickerStyle = .wheels
             self?.birthdayDatePicker.maximumDate = Date()
+            self?.birthdayDatePicker.addTarget(self, action: #selector(self?.dateChanged(_:)) , for: .valueChanged)
             
             textField.inputView = self?.birthdayDatePicker
+            textField.tag = 100
             
             let toolbar = UIToolbar()
             toolbar.sizeToFit()
@@ -112,6 +124,17 @@ class MyAccountViewController: UIViewController {
         }
         
         present(ac, animated: true)
+    }
+    
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        if let alert = presentedViewController as? UIAlertController,
+           let textField = alert.textFields?.first(where: { $0.tag == 100 }) {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .none
+            textField.text = formatter.string(from: birthdayDatePicker.date)
+           }
     }
     
     
@@ -140,20 +163,19 @@ class MyAccountViewController: UIViewController {
         let ac = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
-            
-            do {
-                try self?.viewModal.logoutUser()
-                print("Logged out successfully")
-                UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                guard let window = self?.view.window else { return }
-                if let newUserVC = self?.storyboard?.instantiateViewController(withIdentifier: "NewUserNavController") {
-                    window.rootViewController = newUserVC
+            self?.viewModal.onLogoutError = { error in
+                if let error = error {
+                    let ac = UIAlertController(title: "Logout Error", message: error.localizedDescription, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                    self?.present(ac, animated: true)
+                    return
+                } else {
+                    guard let window = self?.view.window else { return }
+                    if let newUserVC = self?.storyboard?.instantiateViewController(withIdentifier: "NewUserNavController") {
+                        window.rootViewController = newUserVC
+                    }
                 }
-            } catch {
-                let ac = UIAlertController(title: "Logout Error", message: error.localizedDescription, preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "Ok", style: .default))
-                self?.present(ac, animated: true)
-                return
+                
             }
         })
         

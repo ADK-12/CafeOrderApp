@@ -15,6 +15,8 @@ class UserDetailsViewModal {
     var email = ""
     var password = ""
     var birthday = "Not Provided"
+    var name = ""
+    var gender = ""
     
     typealias Handler = ((AuthDataResult?, (any Error)?) -> Void)
     
@@ -24,7 +26,7 @@ class UserDetailsViewModal {
     }
     
     
-    func saveUserDetails(name: String, gender: String, onSave: @escaping ((any Error)?) -> Void) {
+    func saveUserDetails(onSave: @escaping ((any Error)?) -> Void) {
         let database = Firestore.firestore()
         
         guard let user = Auth.auth().currentUser else {

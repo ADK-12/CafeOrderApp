@@ -11,16 +11,20 @@ import Foundation
 final class MenuViewModal {
     var menu = [Menu]()
     
-    var eventHandler: ((_ event: Event) -> Void)? // Data Binding Closure
+    var onMenuFetch: ((_ event: Event) -> Void)? // Data Binding Closure
+    
+    var cartQuantity: Int {
+        return CartManager.shared.totalQuantity
+    }
     
     func fetchMenu() {
         Task {
             do {
-                eventHandler?(.loading)
+                onMenuFetch?(.loading)
                 menu = try await APIManager.shared.fetchData()
-                eventHandler?(.dataLoaded)
+                onMenuFetch?(.dataLoaded)
             } catch {
-                eventHandler?(.error(error))
+                onMenuFetch?(.error(error))
             }
         }
     }

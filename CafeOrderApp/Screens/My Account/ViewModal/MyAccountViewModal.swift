@@ -14,7 +14,10 @@ class MyAccountViewModal {
     
     var userDetails: UserDetails?
     
+    var onError: ((Error?) -> Void)?
     var onDetailsFetched: (() -> Void)?
+    
+    var onLogoutError: ((Error?) -> Void)?
     
     
     func fetchuserDetails() {
@@ -23,7 +26,7 @@ class MyAccountViewModal {
         
         database.collection("users").document(uid).getDocument { [weak self] document, error in
             if let error = error {
-                print("Error fetching user details: \(error.localizedDescription)")
+                self?.onError?(error)
                 return
             }
             
@@ -33,10 +36,11 @@ class MyAccountViewModal {
                       let birthday = data["birthday"] as? String,
                       let gender = data["gender"] as? String
                 else {
-                    print("Error fetching user details")
+                    self?.onError?(nil)
                     return
                 }
                 
+                print("User Details Fetched Successfully")
                 self?.userDetails = UserDetails(name: name, email: email, birthday: birthday, gender: gender)
                 self?.onDetailsFetched?()
             }
@@ -74,10 +78,18 @@ class MyAccountViewModal {
     }
     
     
-    func logoutUser() throws {
+    func logoutUser() {
         CartManager.shared.allItems.removeAll()
         
-        try Auth.auth().signOut()
+        do {
+            try Auth.auth().signOut()
+            
+            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+            print("Logged out successfully")
+            onLogoutError?(nil)
+        } catch {
+            onLogoutError?(error)
+        }
     }
     
 }

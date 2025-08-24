@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
 
 class HomeViewController: UIViewController {
@@ -31,6 +29,12 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        viewModal.onError = { [weak self] in
+            self?.welcomeLabel.text = "Hi welcome to"
+            self?.viewModal.offerImages = ["offer1", "offer2", "offer3", "offer4"]
+            self?.setupOfferScrollView()
+        }
         
         viewModal.onNameFetch = { [weak self] name in
             if let name = name {

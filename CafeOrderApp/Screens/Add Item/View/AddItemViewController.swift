@@ -7,12 +7,10 @@
 
 import UIKit
 
-class AddItemSheet: UIViewController {
 
-    var isCustomizable = true
-    var name = ""
-    var price = 0
-    var onDismiss: (() -> Void)?
+class AddItemViewController: UIViewController {
+
+    var viewModal = AddItemViewModal()
     
     var quantityLabel = UILabel()
     var priceLabel = UILabel()
@@ -33,7 +31,7 @@ class AddItemSheet: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        finalPrice = price
+        finalPrice = viewModal.price
         
         view.backgroundColor = .secondarySystemBackground
         
@@ -45,7 +43,7 @@ class AddItemSheet: UIViewController {
     
     func setupSubViews() {
         let nameLabel = UILabel()
-        nameLabel.text = name
+        nameLabel.text = viewModal.name
         nameLabel.numberOfLines = 3
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +67,7 @@ class AddItemSheet: UIViewController {
         separatorLine2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(separatorLine2)
         
-        if isCustomizable {
+        if viewModal.isCustomizable {
             let sizeLabel = UILabel()
             sizeLabel.text = "Size"
             sizeLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
@@ -237,8 +235,8 @@ class AddItemSheet: UIViewController {
     
     
     @objc func selectRegularButtonTapped() {
-        if finalPrice > price {
-            finalPrice = price
+        if finalPrice > viewModal.price {
+            finalPrice = viewModal.price
             quantity += 0
         }
         
@@ -248,7 +246,7 @@ class AddItemSheet: UIViewController {
     
     
     @objc func selectLargeButtonTapped() {
-        if finalPrice == price {
+        if finalPrice == viewModal.price {
             finalPrice += 40
             quantity += 0
         }
@@ -275,27 +273,10 @@ class AddItemSheet: UIViewController {
     
     
     @objc func addItemTapped() {
-        var size: String?
-        if isCustomizable {
-            size = selectRegularButton.isSelected ? "Regular" : "Large"
-        } else {
-            size = nil
+        let size = selectRegularButton.isSelected ? "Regular" : "Large"
+        dismiss(animated: true) { [weak self] in
+            self?.viewModal.addItemTapped(size: size, quantity: self?.quantity ?? 1, finalPrice: self?.finalPrice ?? 100)
         }
-        
-        for (index,item) in CartManager.shared.allItems.enumerated() {
-            if item.name == name {
-                if item.size == size {
-                    CartManager.shared.allItems[index].quantity += quantity
-                    dismiss(animated: true)
-                    onDismiss?()
-                    return
-                }
-            }
-        }
-        
-        CartManager.shared.allItems.append(CartItem(name: name, size: size, quantity: quantity, price: finalPrice))
-        dismiss(animated: true)
-        onDismiss?()
     }
     
 

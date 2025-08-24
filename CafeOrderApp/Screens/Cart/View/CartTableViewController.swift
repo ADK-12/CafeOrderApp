@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class CartTableViewController: UITableViewController {
 
     var viewModal = CartViewModal()
@@ -38,7 +39,7 @@ class CartTableViewController: UITableViewController {
     
     
     @objc func trashTapped() {
-        viewModal.cartItems = [CartItem]()
+        viewModal.trashTapped()
         navigationController?.popViewController(animated: true)
     }
     
@@ -79,7 +80,12 @@ class CartTableViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: false)
     }
     
+}
 
+
+
+extension CartTableViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModal.cartItems.count
     }

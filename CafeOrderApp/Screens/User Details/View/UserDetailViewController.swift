@@ -109,10 +109,11 @@ class UserDetailViewController: UIViewController {
     
     @IBAction func signupTapped(_ sender: Any) {
         guard let name = nameTextField.text else { return }
-        let gender = maleButton.isSelected ? "Male" : femaleButton.isSelected ? "Female" : otherButtton.isSelected ? "Other" : "Not Provided"
+        viewModal.name = name
+        viewModal.gender = maleButton.isSelected ? "Male" : femaleButton.isSelected ? "Female" : otherButtton.isSelected ? "Other" : "Not Provided"
         
-        viewModal.signUpTapped { [weak self] authResult, error in
-            if let error = error {
+        viewModal.signUpTapped { [weak self] authResult, signupError in
+            if let error = signupError {
                 let ac = UIAlertController(title: "Signup Error", message: error.localizedDescription, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Ok", style: .default))
                 self?.present(ac, animated: true)
@@ -120,12 +121,11 @@ class UserDetailViewController: UIViewController {
                 print("User signed up successfully")
             }
             
-            self?.viewModal.saveUserDetails(name: name, gender: gender) { Error in
-                if let Error = Error {
-                    let ac = UIAlertController(title: "Error saving user data", message: Error.localizedDescription, preferredStyle: .alert)
+            self?.viewModal.saveUserDetails { savingError in
+                if let error = savingError {
+                    let ac = UIAlertController(title: "Error saving user data", message: error.localizedDescription, preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ok", style: .default))
                     self?.present(ac, animated: true)
-                    return
                 } else {
                     print("User details saved successfully")
                     
