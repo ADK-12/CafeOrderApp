@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 class NewUserViewController: UIViewController {
 
     @IBOutlet var logoImage: UIImageView!
@@ -16,16 +15,21 @@ class NewUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configuration()
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func configuration() {
         logoImage.image = UIImage(named: "logo")
         logoImage.layer.cornerRadius = 12
-        
-        // Do any additional setup after loading the view.
     }
     
     
     @IBAction func signUpTapped(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
-            vc.buttonTitle = "Proceed"
+            vc.viewModal.buttonTitle = "Proceed"
+            vc.viewModal.isNewUser = true
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -33,7 +37,8 @@ class NewUserViewController: UIViewController {
     
     @IBAction func logInTapped(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
-            vc.buttonTitle = "Log in"
+            vc.viewModal.buttonTitle = "Log in"
+            vc.viewModal.isNewUser = false
             navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class MyAccountViewController: UIViewController {
 
+    var viewModal = MyAccountViewModal()
+    
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var mailLabel: UILabel!
     @IBOutlet var birthdayLabel: UILabel!
@@ -19,71 +21,47 @@ class MyAccountViewController: UIViewController {
     
     let birthdayDatePicker = UIDatePicker()
     
-    var userDetails = UserDetails(name: "", birthday: "", gender: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Profile"
-        
-        DispatchQueue.main.async {
-            self.setupUI()
-        }
-        
-        
+        configuration()
         // Do any additional setup after loading the view.
     }
     
     
-    func setupUI() {
-        let db = Firestore.firestore()
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-                
-        db.collection("users").document(uid).getDocument { [weak self] document, error in
-            if let error = error {
-                print("Error fetching user: \(error.localizedDescription)")
-                return
-            }
+    func configuration() {
+        title = "Profile"
+        
+        viewModal.onDetailsFetched = { [weak self] in
+            guard let userDetails = self?.viewModal.userDetails else { return }
             
-            if let data = document?.data() {
-                if let name = data["name"] as? String {
-                    self?.nameLabel.text = data["name"] as? String
-                    self?.nameButton.setTitle("", for: .normal)
-                    self?.nameButton.setImage(UIImage(systemName: "pencil"), for: .normal)
-                    self?.userDetails.name = name
-                }
-                
-                if let email = data["email"] as? String {
-                    self?.mailLabel.text = email
-                }
-                
-                if let birthday = data["birthday"] as? String {
-                    self?.birthdayLabel.text = birthday
-                    self?.userDetails.birthday = birthday
-                    
-                    if birthday == "Not Provided" {
-                        self?.birthdayButton.setTitle("ADD", for: .normal)
-                        self?.birthdayButton.layer.cornerRadius = 20
-                        self?.birthdayButton.backgroundColor = .systemBlue
-                        self?.birthdayButton.setTitleColor(.white, for: .normal)
-                    } else {
-                        self?.birthdayButton.setTitle("", for: .normal)
-                        self?.birthdayButton.setImage(UIImage(systemName: "pencil"), for: .normal)
-                    }
-                }
-                
-                if let gender = data["gender"] as? String {
-                    self?.userDetails.gender = gender
-                }
+            self?.nameLabel.text = userDetails.name
+            self?.nameButton.setTitle("", for: .normal)
+            self?.nameButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+            
+            self?.mailLabel.text = userDetails.email
+            
+            self?.birthdayLabel.text = userDetails.birthday
+            if userDetails.birthday == "Not Provided" {
+                self?.birthdayButton.setTitle("ADD", for: .normal)
+                self?.birthdayButton.layer.cornerRadius = 20
+                self?.birthdayButton.backgroundColor = .systemBlue
+                self?.birthdayButton.setTitleColor(.white, for: .normal)
+            } else {
+                self?.birthdayButton.setTitle("", for: .normal)
+                self?.birthdayButton.setImage(UIImage(systemName: "pencil"), for: .normal)
             }
         }
+        
+        viewModal.fetchuserDetails()
     }
     
     
     @IBAction func nameButtonTapped(_ sender: UIButton) {
         let ac = UIAlertController(title: "Update Name", message: nil, preferredStyle: .alert)
         ac.addTextField { [weak self] textField in
-            textField.text = self?.userDetails.name
+            textField.text = self?.viewModal.userDetails?.name
             textField.autocapitalizationType = .words
         }
         
@@ -95,9 +73,9 @@ class MyAccountViewController: UIViewController {
                     if !newName.isEmpty {
                         self?.dismiss(animated: true)
                         self?.nameLabel.text = textField.text
-                        self?.userDetails.name = textField.text
                         
-                        self?.updateData()
+                        self?.viewModal.userDetails?.name = textField.text ?? ""
+                        self?.viewModal.updateUserDetails()
                     }
                 }
             }
@@ -114,8 +92,7 @@ class MyAccountViewController: UIViewController {
         let ac = UIAlertController(title: "Update Birthday", message: nil, preferredStyle: .alert)
         ac.addTextField { [weak self] textField in
         
-            textField.text = self?.userDetails.birthday
-        
+            textField.text = self?.viewModal.userDetails?.birthday
         
             self?.birthdayDatePicker.datePickerMode = .date
             self?.birthdayDatePicker.preferredDatePickerStyle = .wheels
@@ -149,9 +126,8 @@ class MyAccountViewController: UIViewController {
         birthdayButton.setTitle("", for: .normal)
         birthdayButton.setImage(UIImage(systemName: "pencil"), for: .normal)
         
-        userDetails.birthday = formatter.string(from: birthdayDatePicker.date)
-        
-        updateData()
+        viewModal.userDetails?.birthday = formatter.string(from: birthdayDatePicker.date)
+        viewModal.updateUserDetails()
     }
     
     
@@ -160,49 +136,19 @@ class MyAccountViewController: UIViewController {
     }
     
     
-    func updateData() {
-        let db = Firestore.firestore()
-                
-        guard let user = Auth.auth().currentUser else {
-            return
-        }
-                
-        let userData: [String: Any] = [
-            "name": userDetails.name!,
-            "gender": userDetails.gender!,
-            "email": user.email!,
-            "birthday": userDetails.birthday!,
-            "updatedAt": FieldValue.serverTimestamp()
-        ]
-                
-        db.collection("users").document(user.uid).setData(userData) { [weak self] error in
-            if let error = error {
-                let ac = UIAlertController(title: "Error saving user data", message: error.localizedDescription, preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "Ok", style: .default))
-                self?.present(ac, animated: true)
-                return
-            } else {
-                print("User details saved successfully")
-            }
-        }
-    }
-    
-    
     @IBAction func logoutTapped(_ sender: Any) {
         let ac = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            
-//            cartData.shared.allItems.removeAll()
             
             do {
-                try Auth.auth().signOut()
+                try self?.viewModal.logoutUser()
                 print("Logged out successfully")
-                
+                UserDefaults.standard.set(false, forKey: "isLoggedIn")
                 guard let window = self?.view.window else { return }
-                weak var newUserVC = self?.storyboard?.instantiateViewController(withIdentifier: "NewUserNavController")
-                window.rootViewController = newUserVC
+                if let newUserVC = self?.storyboard?.instantiateViewController(withIdentifier: "NewUserNavController") {
+                    window.rootViewController = newUserVC
+                }
             } catch {
                 let ac = UIAlertController(title: "Logout Error", message: error.localizedDescription, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Ok", style: .default))

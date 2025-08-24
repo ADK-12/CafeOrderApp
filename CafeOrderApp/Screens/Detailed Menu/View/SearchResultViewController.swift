@@ -128,12 +128,20 @@ extension SearchResultViewController: UITableViewDataSource, UITableViewDelegate
         titleLabel.text = viewModal.filteredMenu[section].type
         headerView.addSubview(titleLabel)
         
-        return headerView
+        if viewModal.filteredMenu[section].items.count > 0 {
+            return headerView
+        } else {
+            return nil
+        }
     }
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        if viewModal.filteredMenu[section].items.count > 0 {
+            return 50
+        } else {
+            return 0
+        }
     }
     
     
