@@ -21,7 +21,7 @@ final class MenuViewModal {
         Task {
             do {
                 onMenuFetch?(.loading)
-                menu = try await APIManager.shared.fetchData()
+                menu = try await APIManager.shared.request(modalType: [Menu].self, type: EndPointItems.menu)
                 onMenuFetch?(.dataLoaded)
             } catch {
                 onMenuFetch?(.error(error))

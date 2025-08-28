@@ -37,7 +37,7 @@ class OrderPlacedViewController: UIViewController {
     
     
     func sendOrder() {
-        viewModal.sendOrder()
+        viewModal.placeOrder()
     }
     
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484A43D72E60632A00DD4419 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A43D62E60632A00DD4419 /* EndPointType.swift */; };
+		484A43DA2E60785E00DD4419 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A43D92E60785E00DD4419 /* Cart.swift */; };
 		4855162D2E44A977002BC3BD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4855162C2E44A977002BC3BD /* Kingfisher */; };
 		485517B12E48ABDE002BC3BD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 485517B02E48ABDE002BC3BD /* FirebaseAuth */; };
 		485517B32E48ABDE002BC3BD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 485517B22E48ABDE002BC3BD /* FirebaseFirestore */; };
@@ -51,6 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		484A43D62E60632A00DD4419 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		484A43D92E60785E00DD4419 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		485515EC2E44A826002BC3BD /* CafeOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		487CF1552E59D3FA008C2DA6 /* LoginViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModal.swift; sourceTree = "<group>"; };
 		487CF15A2E59E0E5008C2DA6 /* UserDetailsViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModal.swift; sourceTree = "<group>"; };
@@ -107,6 +111,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		484A43D52E60630400DD4419 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				484A43D62E60632A00DD4419 /* EndPointType.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		484A43D82E60784200DD4419 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				484A43D92E60785E00DD4419 /* Cart.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		485515E32E44A825002BC3BD = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +254,7 @@
 				48D219792E5374EA001343B1 /* Application */,
 				48D219772E5374E4001343B1 /* Constant */,
 				48D219782E5374E7001343B1 /* Extensions */,
+				484A43D52E60630400DD4419 /* Utility */,
 				48D219762E5374E2001343B1 /* Helper */,
 				48D219752E5374DF001343B1 /* Screens */,
 				48D219742E5374DB001343B1 /* Storyboard */,
@@ -345,6 +366,7 @@
 		48D2197D2E537684001343B1 /* Order Placed */ = {
 			isa = PBXGroup;
 			children = (
+				484A43D82E60784200DD4419 /* Modal */,
 				48D2197F2E5376B2001343B1 /* View */,
 				48D2197E2E5376B0001343B1 /* ViewModal */,
 			);
@@ -578,6 +600,7 @@
 				487CF1562E59D3FA008C2DA6 /* LoginViewModal.swift in Sources */,
 				48D219612E5374D4001343B1 /* APIManager.swift in Sources */,
 				48D2199C2E574BB1001343B1 /* MenuTableViewCell.swift in Sources */,
+				484A43DA2E60785E00DD4419 /* Cart.swift in Sources */,
 				48D219622E5374D4001343B1 /* AppDelegate.swift in Sources */,
 				48E6E5E12E5892940011D47E /* CartManager.swift in Sources */,
 				487CF15B2E59E0E5008C2DA6 /* UserDetailsViewModal.swift in Sources */,
@@ -590,6 +613,7 @@
 				48D2198B2E55B046001343B1 /* Constant.swift in Sources */,
 				48D219672E5374D4001343B1 /* LogInViewController.swift in Sources */,
 				48D219682E5374D4001343B1 /* Menu.swift in Sources */,
+				484A43D72E60632A00DD4419 /* EndPointType.swift in Sources */,
 				48D2196A2E5374D4001343B1 /* MenuViewController.swift in Sources */,
 				48D219962E573D77001343B1 /* SearchResultViewModel.swift in Sources */,
 				48D2196B2E5374D4001343B1 /* MyAccountViewController.swift in Sources */,
