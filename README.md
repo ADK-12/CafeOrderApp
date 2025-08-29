@@ -98,11 +98,13 @@ The app communicates with a REST API for menu and order management:
 ---
 
 # 📸 Screenshots
+
 <p align="center"> <img src="screenshots/home.png" width="200"> <img src="screenshots/menu.png" width="200"> <img src="screenshots/cart.png" width="200"> </p>
 
 ---
 
 # 🔮 Future Enhancements
+
  - Add payment gateway integration
  - Push notifications
  - Apple Sign-In / Google Sign-In support
@@ -110,11 +112,13 @@ The app communicates with a REST API for menu and order management:
 ---
 
 # 🤝 Contribution
+
 Contributions are welcome! If you'd like to improve the app, please fork the repo and submit a pull request.
 
 ---
 
 # 🙏 Acknowledgements
+
 Made with ❤️ in Swift for the love of iOS developement and coffee
  - Firebase — Authentication & Firestore
  - Kingfisher — Image downloading & caching
