@@ -76,8 +76,9 @@ class CartTableViewController: UITableViewController {
     @objc func placeOrderTapped() {
         navigationItem.backButtonTitle = ""
         
-        let vc = OrderPlacedViewController()
-        navigationController?.pushViewController(vc, animated: false)
+        if let vc = storyboard?.instantiateViewController(identifier: "OrderPlacedViewController") as? OrderPlacedViewController{
+            navigationController?.pushViewController(vc, animated: false)
+        }
     }
     
 }

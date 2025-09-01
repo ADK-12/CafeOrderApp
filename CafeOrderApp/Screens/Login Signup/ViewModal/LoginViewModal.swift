@@ -21,4 +21,8 @@ class LoginViewModal {
         Auth.auth().signIn(withEmail: email, password: password, completion: onLogin)
     }
     
+    func signUpTapped(email: String, password: String, onSignup: @escaping Handler ) {
+        Auth.auth().createUser(withEmail: email, password: password, completion: onSignup)
+    }
+    
 }

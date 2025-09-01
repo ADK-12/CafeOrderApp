@@ -112,31 +112,17 @@ class UserDetailViewController: UIViewController {
         viewModal.name = name
         viewModal.gender = maleButton.isSelected ? "Male" : femaleButton.isSelected ? "Female" : otherButtton.isSelected ? "Other" : "Not Provided"
         
-        viewModal.signUpTapped { [weak self] authResult, signupError in
-            if let error = signupError {
-                let ac = UIAlertController(title: "Signup Error", message: error.localizedDescription, preferredStyle: .alert)
+        viewModal.saveUserDetails { [weak self] error in
+            if let error = error {
+                let ac = UIAlertController(title: "Error saving user data", message: error.localizedDescription, preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Ok", style: .default))
                 self?.present(ac, animated: true)
             } else {
-                print("User signed up successfully")
-            }
-            
-            self?.viewModal.saveUserDetails { savingError in
-                if let error = savingError {
-                    let ac = UIAlertController(title: "Error saving user data", message: error.localizedDescription, preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
-                    self?.present(ac, animated: true)
-                } else {
-                    print("User details saved successfully")
-                    
-                    let userDefaults = UserDefaults.standard
-                    userDefaults.set(true, forKey: "isLoggedIn")
-                    
-                    guard let window = self?.view.window else { return }
-                    guard let sceneDelegate = window.windowScene?.delegate as? SceneDelegate else { return }
-                    weak var tabBarController = sceneDelegate.createMainTabBarController()
-                    window.rootViewController = tabBarController
-                }
+                print("User details saved successfully")
+                
+                let vc = ScreenManager.shared.createTabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: false)
             }
         }
     }

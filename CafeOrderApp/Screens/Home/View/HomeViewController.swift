@@ -38,7 +38,11 @@ class HomeViewController: UIViewController {
         
         viewModal.onNameFetch = { [weak self] name in
             if let name = name {
-                self?.welcomeLabel.text = "Hi \(name) welcome to"
+                let attributedString = NSMutableAttributedString(string: "Hi \(name) welcome to")
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 17), range: NSRange(location: 0, length: 3))
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 17, weight: .heavy), range: NSRange(location: 3, length: name.count))
+                attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 17), range: NSRange(location: name.count+3, length: 10))
+                self?.welcomeLabel.attributedText = attributedString
             } else {
                 self?.welcomeLabel.text = "Hi welcome to"
             }

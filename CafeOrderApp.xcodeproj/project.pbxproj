@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		484A43D72E60632A00DD4419 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A43D62E60632A00DD4419 /* EndPointType.swift */; };
 		484A43DA2E60785E00DD4419 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A43D92E60785E00DD4419 /* Cart.swift */; };
+		484A44372E66305400DD4419 /* ScreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A44362E66305400DD4419 /* ScreenManager.swift */; };
+		484A443D2E6631DC00DD4419 /* LaunchViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A443A2E6631DC00DD4419 /* LaunchViewModal.swift */; };
+		484A443E2E6631DC00DD4419 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484A44382E6631DC00DD4419 /* LaunchViewController.swift */; };
 		4855162D2E44A977002BC3BD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4855162C2E44A977002BC3BD /* Kingfisher */; };
 		485517B12E48ABDE002BC3BD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 485517B02E48ABDE002BC3BD /* FirebaseAuth */; };
 		485517B32E48ABDE002BC3BD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 485517B22E48ABDE002BC3BD /* FirebaseFirestore */; };
@@ -55,6 +58,9 @@
 /* Begin PBXFileReference section */
 		484A43D62E60632A00DD4419 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		484A43D92E60785E00DD4419 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		484A44362E66305400DD4419 /* ScreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenManager.swift; sourceTree = "<group>"; };
+		484A44382E6631DC00DD4419 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		484A443A2E6631DC00DD4419 /* LaunchViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModal.swift; sourceTree = "<group>"; };
 		485515EC2E44A826002BC3BD /* CafeOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CafeOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		487CF1552E59D3FA008C2DA6 /* LoginViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModal.swift; sourceTree = "<group>"; };
 		487CF15A2E59E0E5008C2DA6 /* UserDetailsViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModal.swift; sourceTree = "<group>"; };
@@ -125,6 +131,31 @@
 				484A43D92E60785E00DD4419 /* Cart.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		484A44392E6631DC00DD4419 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				484A44382E6631DC00DD4419 /* LaunchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		484A443B2E6631DC00DD4419 /* View Modal */ = {
+			isa = PBXGroup;
+			children = (
+				484A443A2E6631DC00DD4419 /* LaunchViewModal.swift */,
+			);
+			path = "View Modal";
+			sourceTree = "<group>";
+		};
+		484A443C2E6631DC00DD4419 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				484A44392E6631DC00DD4419 /* View */,
+				484A443B2E6631DC00DD4419 /* View Modal */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		485515E32E44A825002BC3BD = {
@@ -285,7 +316,7 @@
 		48D219752E5374DF001343B1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				48E6E5ED2E592E800011D47E /* Launch */,
+				484A443C2E6631DC00DD4419 /* Launch */,
 				48E6E5EB2E592DE90011D47E /* New User */,
 				48E6E5EA2E592D1B0011D47E /* Login Signup */,
 				48E6E5EC2E592DEC0011D47E /* User Details */,
@@ -303,6 +334,7 @@
 		48D219762E5374E2001343B1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				484A44362E66305400DD4419 /* ScreenManager.swift */,
 				48D219412E5374D4001343B1 /* APIManager.swift */,
 				48E6E5E02E5892940011D47E /* CartManager.swift */,
 			);
@@ -504,13 +536,6 @@
 			path = "User Details";
 			sourceTree = "<group>";
 		};
-		48E6E5ED2E592E800011D47E /* Launch */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Launch;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -597,12 +622,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				48D219602E5374D4001343B1 /* AddItemViewController.swift in Sources */,
+				484A443D2E6631DC00DD4419 /* LaunchViewModal.swift in Sources */,
+				484A443E2E6631DC00DD4419 /* LaunchViewController.swift in Sources */,
 				487CF1562E59D3FA008C2DA6 /* LoginViewModal.swift in Sources */,
 				48D219612E5374D4001343B1 /* APIManager.swift in Sources */,
 				48D2199C2E574BB1001343B1 /* MenuTableViewCell.swift in Sources */,
 				484A43DA2E60785E00DD4419 /* Cart.swift in Sources */,
 				48D219622E5374D4001343B1 /* AppDelegate.swift in Sources */,
 				48E6E5E12E5892940011D47E /* CartManager.swift in Sources */,
+				484A44372E66305400DD4419 /* ScreenManager.swift in Sources */,
 				487CF15B2E59E0E5008C2DA6 /* UserDetailsViewModal.swift in Sources */,
 				487CF15F2E5A4F3B008C2DA6 /* HomeViewModal.swift in Sources */,
 				48D219642E5374D4001343B1 /* CartItem.swift in Sources */,

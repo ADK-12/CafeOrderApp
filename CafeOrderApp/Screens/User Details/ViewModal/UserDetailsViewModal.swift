@@ -11,19 +11,10 @@ import FirebaseFirestore
 
 
 class UserDetailsViewModal {
-    
-    var email = ""
-    var password = ""
+
     var birthday = "Not Provided"
     var name = ""
     var gender = ""
-    
-    typealias Handler = ((AuthDataResult?, (any Error)?) -> Void)
-    
-    
-    func signUpTapped(onSignup: @escaping Handler ) {
-        Auth.auth().createUser(withEmail: email, password: password, completion: onSignup)
-    }
     
     
     func saveUserDetails(onSave: @escaping ((any Error)?) -> Void) {
@@ -36,7 +27,7 @@ class UserDetailsViewModal {
         let userData: [String: Any] = [
             "name": name,
             "gender": gender,
-            "email": email,
+            "email": user.email ?? "",
             "birthday": birthday,
             "updatedAt": FieldValue.serverTimestamp()
         ]

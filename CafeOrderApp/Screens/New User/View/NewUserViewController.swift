@@ -28,7 +28,7 @@ class NewUserViewController: UIViewController {
     
     @IBAction func signUpTapped(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController {
-            vc.viewModal.buttonTitle = "Proceed"
+            vc.viewModal.buttonTitle = "Sign up"
             vc.viewModal.isNewUser = true
             navigationController?.pushViewController(vc, animated: true)
         }

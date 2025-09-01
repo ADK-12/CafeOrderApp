@@ -37,10 +37,19 @@ class LogInViewController: UIViewController {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         
         if viewModal.isNewUser {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "UserDetailViewController") as? UserDetailViewController {
-                vc.viewModal.email = email
-                vc.viewModal.password = password
-                navigationController?.pushViewController(vc, animated: true)
+            viewModal.signUpTapped(email: email, password: password) { [weak self] AuthDataResult, error in
+                if let error = error {
+                    let ac = UIAlertController(title: "Signup Error", message: error.localizedDescription, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ok", style: .default))
+                    self?.present(ac, animated: true)
+                } else {
+                    print("User Signed up successfully")
+                    
+                    if let vc = self?.storyboard?.instantiateViewController(withIdentifier: "UserDetailViewController") as? UserDetailViewController {
+                        vc.modalPresentationStyle = .fullScreen
+                        self?.present(vc, animated: true)
+                    }
+                }
             }
         } else {
             viewModal.loginTapped(email: email, password: password) { [weak self] authResult, error in
@@ -51,13 +60,9 @@ class LogInViewController: UIViewController {
                 } else {
                     print("User logged in successfully")
                     
-                    let userDefaults = UserDefaults.standard
-                    userDefaults.set(true, forKey: "isLoggedIn")
-                    
-                    guard let window = self?.view.window else { return }
-                    guard let sceneDelegate = window.windowScene?.delegate as? SceneDelegate else { return }
-                    let tabBarController = sceneDelegate.createMainTabBarController()
-                    window.rootViewController = tabBarController
+                    let vc = ScreenManager.shared.createTabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: false)
                 }
             }
         }

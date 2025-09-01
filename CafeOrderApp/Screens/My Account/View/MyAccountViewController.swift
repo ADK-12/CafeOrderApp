@@ -81,9 +81,7 @@ class MyAccountViewController: UIViewController {
             if let textField = ac.textFields?.first {
                 if let newName = textField.text?.trimmingCharacters(in: .whitespaces) {
                     if !newName.isEmpty {
-                        self?.dismiss(animated: true)
                         self?.nameLabel.text = textField.text
-                        
                         self?.viewModal.userDetails?.name = textField.text ?? ""
                         self?.viewModal.updateUserDetails()
                     }
