@@ -168,13 +168,12 @@ class MyAccountViewController: UIViewController {
                     self?.present(ac, animated: true)
                     return
                 } else {
-                    guard let window = self?.view.window else { return }
-                    if let newUserVC = self?.storyboard?.instantiateViewController(withIdentifier: "NewUserNavController") {
-                        window.rootViewController = newUserVC
-                    }
+                    let vc = ScreenManager.shared.createNewUserViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc, animated: false)
                 }
-                
             }
+            self?.viewModal.logoutUser()
         })
         
         present(ac, animated: true)
